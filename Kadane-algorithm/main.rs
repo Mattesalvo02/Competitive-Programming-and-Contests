@@ -21,3 +21,33 @@ Input: nums = [5,4,-1,7,8]
 Output: 23
 Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
 */
+
+pub fn max_sub_array(nums: &Vec<i32>) -> i32 {
+    let mut currentSum = 0;
+    let mut maxSum = i32::MIN;
+    let mut maxNum = i32::MIN;
+
+    for &num in nums {
+        maxNum = maxNum.max(num);
+        currentSum += num;
+
+        if currentSum < 0 {
+            currentSum = 0;
+        }
+        maxSum = maxSum.max(currentSum);
+    }
+    if maxNum < 0 {
+        return maxNum;
+    }
+    return maxSum;
+}
+
+fn main() {
+    let nums1 = vec![1, -2, 3, 4, -1, 2, 1, -5, 4];
+    let nums2 = vec![-2, -3, -1, -5];
+    let nums3 = vec![5, 4, -1, 7, 8];
+
+    println!("Max subarray sum of {:?} is {}", nums1, max_sub_array(&nums1));
+    println!("Max subarray sum of {:?} is {}", nums2, max_sub_array(&nums2));
+    println!("Max subarray sum of {:?} is {}", nums3, max_sub_array(&nums3));
+}

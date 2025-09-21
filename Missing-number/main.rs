@@ -24,3 +24,23 @@ Output: 8
 Explanation:
 n = 9 since there are 9 numbers, so all numbers are in the range [0,9]. 8 is the missing number in the range since it does not appear in nums.
 */
+
+pub fn missing_number(nums: &Vec<i32>) -> i32 {
+    let n: i32 = nums.len() as i32;
+    let sumTot: i32 = (n*(n+1))/2;
+    let mut sumPartial: i32 = 0;
+    for &x in nums {
+        sumPartial += x;
+    }
+    return sumTot-sumPartial;
+}
+
+fn main() {
+    let nums1 = vec![3, 0, 1];
+    let nums2 = vec![0, 1];
+    let nums3 = vec![9, 6, 4, 2, 3, 5, 7, 0, 1];
+
+    println!("Missing number in {:?} is {}", nums1, missing_number(&nums1));
+    println!("Missing number in {:?} is {}", nums2, missing_number(&nums2));
+    println!("Missing number in {:?} is {}", nums3, missing_number(&nums3));
+}
